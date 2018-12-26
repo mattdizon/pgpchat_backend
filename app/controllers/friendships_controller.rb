@@ -10,7 +10,7 @@ class FriendshipsController < ApiController
     end
 
     def create
-        @friendship = Friendship.create(friendship_params)
+        @friendship = Friendship.create!(friendship_params)
     end
 
 def destroy
@@ -21,6 +21,6 @@ def destroy
 end
 private
 def friendship_params
-    params.require(:friendship).permit(:user_id, :friend_id)
+    params.require(:friendship).permit(:user_id, :friend_id, :friend_name)
 end
 end

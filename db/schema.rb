@@ -10,32 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_23_193934) do
+ActiveRecord::Schema.define(version: 2018_12_25_175155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "conversations", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "friendships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "friend_id"
+    t.string "friend_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string "text"
-    t.bigint "conversation_id"
+  create_table "recieved_messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "sender_id"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["sender_id"], name: "index_recieved_messages_on_sender_id"
+    t.index ["user_id"], name: "index_recieved_messages_on_user_id"
+  end
+
+  create_table "sent_messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "recipient_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_sent_messages_on_recipient_id"
+    t.index ["user_id"], name: "index_sent_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,10 +52,12 @@ ActiveRecord::Schema.define(version: 2018_12_23_193934) do
     t.string "email"
     t.string "password_digest"
     t.string "auth_token"
+    t.text "public_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "friendships", "users"
-  add_foreign_key "messages", "conversations"
+  add_foreign_key "recieved_messages", "users"
+  add_foreign_key "sent_messages", "users"
 end

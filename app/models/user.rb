@@ -6,6 +6,10 @@ class User < ApplicationRecord
     validates_uniqueness_of  :email
     has_many :friendships
     has_many :friends, through: :friendships
+    has_many :sent_messages
+    has_many :recipients, through: :sent_messages
+    has_many :recieved_messages
+    has_many :senders, through: :recieved_messages
 #  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
     #has_many :inverse_friends, through: :inverse_friendships, :source => :user
 

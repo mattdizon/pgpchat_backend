@@ -51,6 +51,6 @@ class UsersController < ApiController
     #changing password to password_digest will bypass rollback but password is not encrypted
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation,
-           :username, :first_name, :last_name)
+           :username, :first_name, :last_name, :public_key)
     end
 end
