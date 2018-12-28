@@ -21,6 +21,6 @@ def destroy
 end
 private
 def friendship_params
-    params.require(:friendship).permit(:user_id, :friend_id, :friend_name)
+    params.require(:friendship).permit(:user_id, :friend_id, :friend_name, :friend_public_key, :user_public_key)
 end
 end

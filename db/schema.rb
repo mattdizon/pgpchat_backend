@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_12_25_175155) do
     t.bigint "user_id"
     t.bigint "friend_id"
     t.string "friend_name"
+    t.text "friend_public_key"
+    t.text "user_public_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
@@ -28,6 +30,7 @@ ActiveRecord::Schema.define(version: 2018_12_25_175155) do
   create_table "recieved_messages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "sender_id"
+    t.string "sender_name"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,6 +41,7 @@ ActiveRecord::Schema.define(version: 2018_12_25_175155) do
   create_table "sent_messages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "recipient_id"
+    t.string "recipient_name"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

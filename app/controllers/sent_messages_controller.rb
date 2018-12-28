@@ -11,7 +11,7 @@ class SentMessagesController < ApplicationController
         def create
             @sent_messages = SentMessage.create!(sent_messages_params)
         end
-        
+
     def destroy
       @sent_messages = current_user.sent_messages.find(params[:id])
       @sent_messages.destroy
@@ -20,7 +20,7 @@ class SentMessagesController < ApplicationController
     end
     private
     def sent_messages_params
-        params.require(:sent_message).permit(:user_id, :recipient_id, :content)
+        params.require(:sent_message).permit(:user_id, :recipient_id, :recipient_name, :content)
     end
 
 end

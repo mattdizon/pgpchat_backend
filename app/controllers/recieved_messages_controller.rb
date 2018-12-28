@@ -20,6 +20,6 @@ def destroy
 end
 private
 def recieved_messages_params
-    params.require(:recieved_message).permit(:user_id, :sender_id, :content)
+    params.require(:recieved_message).permit(:user_id, :sender_id, :sender_name, :content)
 end
 end
